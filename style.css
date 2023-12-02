@@ -26,9 +26,9 @@ a {
 }
 /* =============================================================== */
 
-/* header */
-.container{
-  width: 1110px;
+/* header Thành */
+.top-bar-header .container{
+  padding: 100x 100px;
   margin: auto;
 }
 .bg-black{
@@ -352,7 +352,7 @@ a {
   margin-right: 3px;
 }
 
-/* spring shop */
+/* spring shop Minh Hoàng */
 .spring-shop {
   background-image: url(https://okab.pixeldima.com/shop/wp-content/uploads/sites/5/2016/06/shop-section.jpg);
   background-position: center center;
@@ -726,6 +726,7 @@ a {
 }
 /* =============================================================== */
 
+/* Quang Anh */
 /* core_value */
 .core_value {
   margin: auto;
@@ -799,7 +800,7 @@ a {
   align-items: center;
 }
 
-.container {
+.footer-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -807,7 +808,7 @@ a {
   justify-content: space-evenly;
 }
 
-.container_item {
+.footer-container_item {
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -816,45 +817,45 @@ a {
 }
 
 /* footer universal */
-.container_item h5 {
+.footer-container_item h5 {
   font-size: 18px;
   margin-bottom: 18px;
 }
 
-.container_item p {
+.footer-container_item p {
   margin-top: -10px;
   font-size: 14px;
   text-align: left;
 }
 
 /* categories */
-/* .container_item .divider {
+/* .footer-container_item .divider {
   background-color: #77777716;
   height: 2px;
 } */
 
-.container_item ul{
+.footer-container_item ul{
   width: 100%;
 }
 
-.container_item ul li {
+.footer-container_item ul li {
   list-style: none;
   padding: 15px 0;
   border-bottom: solid 1px #77777716;
 }
 
-.container_item ul li a {
+.footer-container_item ul li a {
   font-size: 14px;
   color: #777;
   transition: all 0.3s ease-in-out;
 }
 
-.container_item ul li a:hover {
+.footer-container_item ul li a:hover {
   color: #f1404b;
 }
 
 /* top rated products */
-.container_item .topratedProducts {
+.footer-container_item .topratedProducts {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -863,7 +864,7 @@ a {
   gap: 10px;
 }
 
-.container_item img{
+.footer-container_item img{
   height: 80px;
   width: 100px;
   object-fit: cover;
