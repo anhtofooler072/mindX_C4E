@@ -3,6 +3,77 @@ let topratedProducts_img;
 topratedProducts_img = document.querySelector(".topratedProducts");
 // console.log(topratedProducts_img);
 
+// for header
+// thứ ngày tháng năm trên header
+let currentDay=new Date()
+let day=document.getElementById("day")
+let month=document.getElementById("month")
+let day2=document.getElementById("day2")
+let years=document.getElementById("year")
+
+let number_day=currentDay.getDay()
+let day_name=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+day.innerText=day_name[number_day]+" , "
+let number_month=currentDay.getMonth()
+let month_name=["January","February","March","April","May","June","July","August","September","October","November","December"]
+month.innerText=month_name[number_month]    
+day2.innerText=currentDay.getDate()
+years.innerText=currentDay.getFullYear()
+
+let takeout=JSON.parse(localStorage.getItem('products'))
+let item_list=document.getElementById('item-list-arriva-1')
+function renderProduct_arrival_1(takeout){
+        let item_show=''
+        let item_sale=''
+        takeout.forEach((item,index) => {
+            if(index<4){
+                let star_rate_item=''
+                let review_item=parseInt(item.review)
+                for(let i=0;i<5;i++){
+                    if(i<review_item){
+                        star_rate_item+=`<i class="fa fa-star"></i>`
+                    }else{
+                        star_rate_item+=`<i class="fa fa-star no-rate-star"></i>`
+                    }
+                }
+                if(Number(item.productId)==0){
+                    item_sale=`<img class="item-sale" src="https://lh3.googleusercontent.com/drive-viewer/AK7aPaC3H8Tb_T9dRF4x0Wa5PfKfB0D_HK_qFI8BVr8208Sb_BodG_OChkSwqAuSxAIknpeY2Tqqd_i3d6CAPNowLNUPgkqQ=s2560" alt="ảnh sale">`
+                }
+                console.log(item.productId)
+                item_show+=`
+                <div class="item-buy-box inl-block">
+                    <div class="item-border-box" \
+                    onmouseover="changeImage_arrival_1(this, '${item.img[1]}')" 
+                    onmouseout="changeImage_arrival_1(this, '${item.img[0]}')">
+                        <a class="product-item" href="#">
+                            <div class="item-show">
+                                    <img class="item-img" src="${item.img[0]}" alt="ảnh giày">
+                                    ${item_sale}
+                                <div class="button-buy-box">
+                                    <button class="detail-item"><i class="fa fa-link"></i></button>
+                                    <button class="buy-item"><i class="fa fa-shopping-bag"></i></button>
+                                </div>
+                            </div>  
+                            <p class="item-name">${item.productName}</p>
+                        </a>
+                        <div class="item-rate">
+                            ${star_rate_item}
+                        </div>
+                    </div>
+                    <div class="item-price-box">
+                        <p class="item-price inl-block">${item.price}</p>
+                    </div>
+                </div>`
+            }
+            // console.log(index)
+            item_sale=''
+            item_list.innerHTML=item_show
+});}
+renderProduct_arrival_1(takeout)
+function changeImage_arrival_1(changeimg,item){
+    changeimg.querySelector(".item-img").src = item;
+}
+// ==============================================
 
 // for spring shop
 const storedProducts = JSON.parse(localStorage.getItem("products"));

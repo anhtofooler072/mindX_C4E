@@ -26,6 +26,332 @@ a {
 }
 /* =============================================================== */
 
+/* header */
+.container{
+  width: 1110px;
+  margin: auto;
+}
+.bg-black{
+  background-color: black;
+}
+.no-rate-star{
+  opacity: 0.5;
+}
+#header{
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+.inl-block{
+  display: inline-block;
+}
+.top-bar-header{
+  background-color: #363636;
+  color: white;
+  padding:8px 0px;
+  font-size: 14px;
+  line-height: 14px;
+  width: 100%;
+}
+.top-bar-header .container{
+  display: flex;
+  justify-content: space-between;
+}
+.top-bar-header ul li{
+  text-decoration: none;
+}
+.top-bar-header i{
+  font-size: 18px;
+  margin-right: 14px;
+}
+.top-bar-header .calendar{
+  margin-right: 50px;
+  display: inline-block;
+}
+.right-header i{
+  cursor: pointer;
+}
+.top-bar-header .account a{
+  color: white;
+  text-decoration: none;
+}
+.account-box{
+  margin-right: 40px;
+}
+.account-box:hover .account{
+  text-decoration: underline;
+}
+.dima-header-menu{
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+.dima-header .dima-header-menu .container{
+  height: 110px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+.dima-header-menu ul{
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+.dima-header-menu ul li{
+  margin-right: 30px;
+  font-size: 14px;
+  height: 100%;
+}
+.dima-header-menu ul li a:hover{
+  color: red;
+}
+.dima-header-menu ul li i{
+  font-size: 20px;
+}
+
+.dima-header-menu a{
+  text-decoration: none;
+  color: black;
+}
+.dima-header .buy-header{
+  padding-left: 30px;
+  border-left: 1px solid rgba(168, 168, 168, 0.4);
+  line-height: 80px;
+  margin: 0;
+  position: relative;
+  font-size: 14px;
+}
+.dima-header .buy-header:hover a{
+  color: red;
+}
+.dima-header-menu .buy-header i{
+  font-size: 20px;
+}
+.dima-header .buy-header .number-buy{
+  background-color: red;
+  color: white;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  font-size: 14px;
+  border-radius: 50%;
+  display:block;
+  position: absolute;
+  top: 10px;
+  left: 45px;
+}
+.buy-header .price-buy{
+  margin-left: 20px;
+}
+.dima-slider{
+  padding-top: 145px;
+  background-color: #FAFAFA;
+  display: flex;
+  align-items: center;
+}
+.dima-slider .slider-1{
+  display: flex;
+  align-items: center;
+}
+.slider-1 .img{
+  width: 100%;
+}
+.event-description{
+  padding-right: 150px;
+}
+.event-description p{
+  padding-bottom: 30px;
+}
+.event-description .title-slider{
+  font-size: 22px;
+}
+.event-description .discount-slider{
+  font-size: 55px;
+}
+.event-description .description-slider{
+  font-size: 16px;
+  line-height: 30px;
+  text-align: justify;
+}
+.discount-slider .discount-off{
+  color: red;
+}
+.event-description .shop-now-slider{
+  padding: 12px 34px;
+  background-color: transparent;
+  border: 1px solid black;
+}
+.event-description .shop-now-slider:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.post-content{
+  margin-top: 30px;
+  width: 100%;
+}
+.post-content .page-banner-box{
+  display: flex;
+  justify-content: space-between;
+}
+.post-content  .page-banner{
+  position: relative;
+}
+.page-banner .banner-img{
+  width: 100%;
+}
+.page-banner .banner-detail{
+  position: absolute;
+  top: 40%;
+  left: 10%;
+  width: 42%;
+}
+.banner-detail .title-banner{
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.banner-detail .detail-banner{
+  line-height: 30px;
+  padding-bottom: 20px;
+}
+/* title arrival */
+.post-content .arrival-box{
+  margin-top: 6.25em;
+}
+.arrival-box .title-arrival-box{
+  text-align: center;
+  margin-bottom: 50px;
+}
+.title-arrival-box .title-arrival{
+  font-size: 1.75em;
+  font-weight:unset;
+  margin-bottom: 30px;
+}
+.title-arrival-box .small-line-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-arrival-box .two-slide-title{
+  width: 80px;
+  height: 1px;
+  margin: 0px 5px;
+  background-color: #E1E1E1;
+}
+.title-arrival-box .circle-title{
+  width: 13px;
+  height: 13px;
+  border: 1px solid red;
+  border-radius: 50%;
+}
+/* item trong new arrival */
+.item-list-box .item-list{
+  display: flex;
+  justify-content: space-between;
+}
+.item-list .item-buy-box{
+  width: 23%;
+}
+.item-list .item-buy-box:hover .button-buy-box{
+  background-color: rgba(117, 117, 117, 0.4);
+}
+.item-list .item-buy-box:hover .item-sale{
+  background-color: none;
+}
+.item-border-box .item-sale{
+  right: 3px;
+  top: 3px;
+  position: absolute;
+  z-index: 1;
+}
+.item-list .item-buy-box:hover .button-buy-box button{
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+}
+.item-buy-box .button-buy-box button:hover{
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.item-buy-box .product-item{
+  text-decoration: none;
+  color: black;
+}
+.item-border-box .item-img{         
+  width: 100%;
+}
+.item-buy-box .item-border-box{
+  position: relative;
+  border:1px solid #E1E1E1;
+}
+.item-border-box .item-show{
+  border-bottom: 1px solid #E1E1E1;
+}
+.item-border-box .button-buy-box{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.button-buy-box button{
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border:1px solid white;
+  color: white;
+  font-size: 20px;
+  transform: translateY(30px);
+  opacity: 0.2;
+  visibility: hidden;
+  transition: 0.15s;
+}
+.button-buy-box .detail-item{
+  margin-right: 30px;
+}
+.item-border-box .item-name{
+  margin-top: 15px;
+  text-align: center;
+}
+.item-border-box .item-rate{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.item-border-box .item-rate i{
+  color: orange;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.item-border-box .item-rate i:nth-child(1){
+  margin-left: 0px;
+}
+.item-buy-box .item-price-box{
+  margin-top: 15px;
+  text-align: center;
+  font-size: 18px;
+}
+.item-page{
+  margin-top: 35px;
+  text-align: center;
+  margin-bottom: 6.25em;
+}
+.item-page .number-page{
+  width: 12px;
+  height: 12px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.item-page .number-page:nth-child(1){
+  margin-right: 3px;
+}
+
 /* spring shop */
 .spring-shop {
   background-image: url(https://okab.pixeldima.com/shop/wp-content/uploads/sites/5/2016/06/shop-section.jpg);
