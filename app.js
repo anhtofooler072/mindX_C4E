@@ -1,3 +1,6 @@
+// for top rated products in footer
+let topratedProducts_img;
+topratedProducts_img = document.querySelector(".topratedProducts");
 // console.log(topratedProducts_img);
 
 // for header
@@ -54,26 +57,26 @@ function renderProduct_arrival_1(takeout) {
           star_rate_item += `<i class="fa fa-star no-rate-star"></i>`;
         }
       }
-      if (Number(item.productId) == 0) {
+      if (Number(item.discount) == 1) {
         item_sale = `<img class="item-sale" src="https://lh3.googleusercontent.com/drive-viewer/AK7aPaC3H8Tb_T9dRF4x0Wa5PfKfB0D_HK_qFI8BVr8208Sb_BodG_OChkSwqAuSxAIknpeY2Tqqd_i3d6CAPNowLNUPgkqQ=s2560" alt="ảnh sale">`;
       }
-      console.log(item.productId);
+      // console.log(item.productId)
       item_show += `
                 <div class="item-buy-box inl-block">
                     <div class="item-border-box" \
                     onmouseover="changeImage_arrival_1(this, '${item.img[1]}')" 
                     onmouseout="changeImage_arrival_1(this, '${item.img[0]}')">
-                        <a class="product-item" href="#">
+                        <div class="product-item" href="#">
                             <div class="item-show">
                                     <img class="item-img" src="${item.img[0]}" alt="ảnh giày">
                                     ${item_sale}
                                 <div class="button-buy-box">
-                                    <button class="detail-item"><i class="fa fa-link"></i></button>
-                                    <button class="buy-item"><i class="fa fa-shopping-bag"></i></button>
+                                    <button class="button detail-item"><i class="fa fa-link"></i></button>
+                                    <button class="button buy-item" onclick='addToCart(${item.productId});'><i class="fa fa-shopping-bag"></i></button>
                                 </div>
                             </div>  
                             <p class="item-name">${item.productName}</p>
-                        </a>
+                        </div>
                         <div class="item-rate">
                             ${star_rate_item}
                         </div>
@@ -99,7 +102,7 @@ const storedProducts = JSON.parse(localStorage.getItem("products"));
 const productElement = document.querySelector("#product-list");
 //Render new products
 function renderNewProducts(products) {
-  console.log(products);
+  // console.log(products);
   products.forEach((product) => {
     if (product.newProduct === "1") {
       let displayedPrice = "";
@@ -118,7 +121,7 @@ function renderNewProducts(products) {
       const starRatingHTML = getStarRating(numberOfReviews);
 
       const productHTML = `
-            <div class="product-container">
+            <div class="product-contentContainer" data-id=${product.productId}>
             <div class="product-content">
             <div class="product-img"
             onmouseover="changeImage(this, '${product.img[1]}')" 
@@ -132,8 +135,8 @@ function renderNewProducts(products) {
                  <div class="img-overlay">
                     <ul>
                     <li>
-                    <a href=""><i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    </a>
+                    <button class="buy-item"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    </button>
                     </li>
                     <li>
                     <a href=""><i class="fa fa-link" aria-hidden="true"></i>
@@ -182,7 +185,7 @@ function filterProductsByCategory(category) {
   const filteredProducts = storedProducts.filter((product) => {
     return product.newProduct === "1" && product.categories.includes(category);
   });
-  console.log(filteredProducts);
+  // console.log(filteredProducts)
   renderNewProducts(filteredProducts);
 }
 
@@ -245,9 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 // ==============================================
-// for top rated products in footer
-let topratedProducts_img;
-topratedProducts_img = document.querySelector(".topratedProducts");
+
 // for footer
 // find top rated products
 let toprated = JSON.parse(localStorage.getItem("products"));
@@ -258,21 +259,88 @@ for (let i = 0; i < toprated.length; i++) {
     maxReview = Number(toprated[i].review);
   }
 }
-console.log(maxReview);
+// console.log(maxReview);
 
 // generate top rated products
 for (let j = 0; j < toprated.length; j++) {
   if (Number(toprated[j].review) === maxReview) {
-    console.log(toprated[j]);
+    // console.log(toprated[j]);
     topratedProducts_img_content += `
-    <div class="topratedProducts_container">
-      <img src="${toprated[j].img[1]}" alt="pict" />
-      <div class="toprated_info">
-        ${toprated[j].productName}</p>
-      </div>
-    </div>
+    <img src="${toprated[j].img[1]}" alt="pict" />
     `;
     topratedProducts_img.innerHTML = topratedProducts_img_content;
   }
 }
 // ==============================================
+
+// function add to cart
+let numberCart = document.querySelector(".number-buy");
+let numberCart_content = "";
+let totalPrice_dom = document.querySelector(".price-buy");
+let subTotalPrice_dom = document.querySelector("#Subtotal_QA");
+
+// if (localStorage.getItem("totalprice") == undefined) {
+//   totalPrice = 0;
+//   console.log(totalPrice);
+// } else {
+//   totalPrice = JSON.parse(localStorage.getItem("totalprice"));
+//   console.log(totalPrice);
+// }
+
+if (
+  localStorage.getItem("added-to-Cart") == "[]" ||
+  localStorage.getItem("added-to-Cart") == undefined
+) {
+  cartProduct = [];
+} else {
+  cartProduct = JSON.parse(localStorage.getItem("added-to-Cart"));
+}
+
+let pItem = [];
+// check if there is value in count in local storage
+let count = 0;
+if (localStorage.getItem("number-of-product") == undefined) {
+} else {
+  count = JSON.parse(localStorage.getItem("number-of-product"));
+}
+console.log(count);
+numberCart.innerHTML = count;
+
+function addToCart(id) {
+  // count number of product then let it in local storage and show it in cart
+  count++;
+  numberCart.innerHTML = count;
+  let totalPrice = 0;
+  localStorage.setItem("number-of-product", JSON.stringify(count));
+  let addedP = takeout.find((item) => item.productId == id);
+  let flag = false;
+  let index = -1;
+  for (i = 0; i < cartProduct.length; i++) {
+    if (addedP.productId == cartProduct[i].pItem.productId) {
+      flag = true;
+      index = i;
+    }
+  }
+  if (flag) {
+    cartProduct[index].sl++;
+  } else {
+    cartProduct.push({
+      sl: 1,
+      pItem: addedP,
+    });
+  }
+  localStorage.setItem("added-to-Cart", JSON.stringify(cartProduct));
+  // sum total price
+  for(i = 0; i < cartProduct.length; i++){
+    cartProduct[i].pItem.discount == 1
+      ? (selectedPrice = cartProduct[i].pItem.discountPrice)
+      : (selectedPrice = cartProduct[i].pItem.price);
+    totalPrice += cartProduct[i].sl * selectedPrice;
+  }
+  totalPrice_dom.innerHTML = `$${totalPrice}`;
+  subTotalPrice_dom.innerHTML = `$${totalPrice}`;
+}
+totalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
+subTotalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
+// ==============================================
+// localStorage.clear();
