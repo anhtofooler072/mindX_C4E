@@ -1,8 +1,3 @@
-// for top rated products in footer
-let topratedProducts_img;
-topratedProducts_img = document.querySelector(".topratedProducts");
-// console.log(topratedProducts_img);
-
 // for header
 // thứ ngày tháng năm trên header
 let currentDay = new Date();
@@ -118,7 +113,7 @@ function renderNewProducts(products) {
         displayedPrice = product.price;
       }
 
-      const starRatingHTML = getStarRating(numberOfReviews);
+      const starRatingHTML = getStarRating(numberOfReviews,1);
 
       const productHTML = `
             <div class="product-contentContainer" data-id=${product.productId}>
@@ -169,13 +164,22 @@ function changeImage(element, newImage) {
 }
 
 // Star rating
-function getStarRating(numberOfReviews) {
-  let starsHTML = "";
-  for (let i = 5; i > 0; i--) {
-    const starClass = i <= numberOfReviews ? "star" : "starOpacity";
-    starsHTML += `<span class="${starClass}" data-rating="${i}"><i class="fa fa-star" aria-hidden="true"></i></span>`;
+function getStarRating(numberOfReviews, renderflag) {
+  if (renderflag) {
+    let starsHTML = "";
+    for (let i = 5; i > 0; i--) {
+      const starClass = i <= numberOfReviews ? "star" : "starOpacity";
+      starsHTML += `<span class="${starClass}" data-rating="${i}"><i class="fa fa-star" aria-hidden="true"></i></span>`;
+    }
+    return starsHTML;
+  } else {
+    let starsHTML = "";
+    for (let i = 5; i > 0; i--) {
+      const starClass = i <= numberOfReviews ? "star" : "starOpacity";
+      starsHTML += `<span class="${starClass} topratedProducts_item_detail_rated" data-rating="${i}"><i class="fa fa-star" aria-hidden="true"></i></span>`;
+    }
+    return starsHTML;
   }
-  return starsHTML;
 }
 
 renderNewProducts(storedProducts);
@@ -248,7 +252,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 // ==============================================
-
+// for top rated products in footer
+let topratedProducts_img;
+topratedProducts_img = document.querySelector(".topratedProducts");
+// console.log(topratedProducts_img);
 // for footer
 // find top rated products
 let toprated = JSON.parse(localStorage.getItem("products"));
@@ -263,10 +270,20 @@ for (let i = 0; i < toprated.length; i++) {
 
 // generate top rated products
 for (let j = 0; j < toprated.length; j++) {
+  const starRatingHTML = getStarRating(Number(toprated[j].review),0);
   if (Number(toprated[j].review) === maxReview) {
     // console.log(toprated[j]);
     topratedProducts_img_content += `
-    <img src="${toprated[j].img[1]}" alt="pict" />
+    <div class="topratedProducts_item">
+                <img src="${toprated[j].img[1]}" alt="pict">
+                <div class="topratedProducts_item_detail">
+                  <p class="topratedProducts_item_detail_name">${toprated[j].productName}</p>
+                  <div class="star-rating topratedProducts_item_detail_rated" title="rated 3 out of 5" data-rating="3">
+                  ${starRatingHTML}
+                  </div>
+                  <p class="topratedProducts_item_detail_price">${toprated[j].price}</p>
+              </div>
+              </div>
     `;
     topratedProducts_img.innerHTML = topratedProducts_img_content;
   }
@@ -274,9 +291,9 @@ for (let j = 0; j < toprated.length; j++) {
 // ==============================================
 
 // function add to cart
-let numberCart = document.querySelector(".number-buy");
-let numberCart_content = "";
-let totalPrice_dom = document.querySelector(".price-buy");
+let numberCart = document.querySelector("#amount");
+let numberCart_contentamount;
+let totalPrice_dom = document.querySelector("#totalPrices");
 let subTotalPrice_dom = document.querySelector("#Subtotal_QA");
 
 // if (localStorage.getItem("totalprice") == undefined) {
@@ -331,7 +348,7 @@ function addToCart(id) {
   }
   localStorage.setItem("added-to-Cart", JSON.stringify(cartProduct));
   // sum total price
-  for(i = 0; i < cartProduct.length; i++){
+  for (i = 0; i < cartProduct.length; i++) {
     cartProduct[i].pItem.discount == 1
       ? (selectedPrice = cartProduct[i].pItem.discountPrice)
       : (selectedPrice = cartProduct[i].pItem.price);
@@ -341,6 +358,8 @@ function addToCart(id) {
   subTotalPrice_dom.innerHTML = `$${totalPrice}`;
 }
 totalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
-subTotalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
+subTotalPrice_dom.innerHTML = `$${JSON.parse(
+  localStorage.getItem("totalprice")
+)}`;
 // ==============================================
 // localStorage.clear();

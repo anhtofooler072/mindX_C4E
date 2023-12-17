@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "montserrat", sans-serif;
+  font-family: "montserrat", sans-serif !important;
   font-size: 16px;
   line-height: 1.5;
   color: #777;
@@ -21,7 +21,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #777;
 }
 
@@ -457,6 +457,9 @@ a {
   margin: 15px 0;
 }
 
+.brandCaro {
+  padding: 50px 0;
+}
 /* =============================================================== */
 
 /* footer */
@@ -484,6 +487,7 @@ a {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  color: #777;
 }
 
 /* footer universal */
@@ -526,19 +530,6 @@ a {
 
 /* top rated products */
 
-.topratedProducts_contentContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  /* justify-content: space-evenly; */
-}
-.toprated_info {
-  display: flex;
-  flex-direction: column;
-}
-
 .footer-contentContainer_item .topratedProducts {
   width: 100%;
   display: flex;
@@ -553,6 +544,54 @@ a {
   width: 100px;
   object-fit: cover;
 }
+
+/* top item img */
+.topratedProducts_item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.topratedProducts_item img {
+  height: 80px;
+  width: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+/* top item detail */
+.topratedProducts_item .topratedProducts_item_detail {
+  margin-left: 10px;
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.topratedProducts_item
+  .topratedProducts_item_detail
+  .topratedProducts_item_detail_name {
+  margin: 0;
+  font-size: 14px;
+}
+
+.topratedProducts_item
+  .topratedProducts_item_detail
+  .topratedProducts_item_detail_rated {
+  translate: -1px 2px;
+  margin: 5px 0;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.topratedProducts_item
+  .topratedProducts_item_detail
+  .topratedProducts_item_detail_price {
+  margin: 0;
+}
+/*  */
 
 /* bottom footer */
 .bottom_footer {

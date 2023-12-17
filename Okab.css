@@ -7,7 +7,7 @@ body{
     width: 100%;
     height: 100%;
 }
-.contentContainer{
+.container{
     width: 1110px;
     margin: auto;
 }
@@ -33,7 +33,7 @@ body{
     line-height: 14px;
     width: 100%;
 }
-.top-bar-header .contentContainer{
+.top-bar-header .container{
     display: flex;
     justify-content: space-between;
 }
@@ -65,7 +65,7 @@ body{
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
-.dima-header .dima-header-menu .contentContainer{
+.dima-header .dima-header-menu .container{
     height: 110px;
     background-color: rgb(255, 255, 255);
     display: flex;
@@ -121,7 +121,7 @@ body{
     visibility: unset;
     opacity: 1;
 }
-.buy-header-box .buy-contentContainer-header-box li{
+.buy-header-box .buy-container-header-box li{
     width: 300px;
     padding: 20px 0px;
     border-top: 1px solid rgba(168, 168, 168, 0.4);
@@ -134,7 +134,7 @@ body{
     text-transform: uppercase;
     margin-bottom: 10px;
 }
-.buy-header-box .buy-contentContainer-header-box{
+.buy-header-box .buy-container-header-box{
     padding:30px;
 }
 .buy-header-box .item-buy-amount-box img{
@@ -143,16 +143,16 @@ body{
     margin-right: 20px;
     border: 1px solid rgba(168, 168, 168, 0.4)
 }
-.buy-contentContainer-header-box .total-money-item{
+.buy-container-header-box .total-money-item{
     display: flex;
     justify-content: space-between;
     font-size: 18px;
     font-weight: bold;
 }
-.buy-contentContainer-header-box .button-wallet-box{
+.buy-container-header-box .button-wallet-box{
     padding-bottom: 0px !important; 
 }
-.buy-contentContainer-header-box .button-wallet-box button{
+.buy-container-header-box .button-wallet-box button{
     width: 100%;
     margin-bottom: 10px;
     padding: 15px 0px;
@@ -161,16 +161,16 @@ body{
     border: 0px;
     cursor: pointer;
 }
-.buy-contentContainer-header-box .button-wallet-box a{
+.buy-container-header-box .button-wallet-box a{
     text-decoration: none;
     color: white;
 }
-.buy-contentContainer-header-box .button-wallet-box .view-cart{
-    color: white;
+.buy-container-header-box .button-wallet-box .view-cart{
     background-color: black;
     margin-bottom: 10px;
+    color: white;
 }
-.buy-contentContainer-header-box .button-wallet-box .check-out{
+.buy-container-header-box .button-wallet-box .check-out{
     background-color: red;
 }
 .dima-header .buy-header:hover>a{

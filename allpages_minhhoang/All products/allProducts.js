@@ -46,7 +46,6 @@ const productElement = document.querySelector("#allProduct-showcase");
 //Function render
 function renderAllProducts(products) {
   products.forEach((product) => {
-
     let displayedPrice = "";
     let discountSpan = "";
     let numberOfReviews = parseInt(product.review);
@@ -77,7 +76,7 @@ function renderAllProducts(products) {
                    <div class="allProduct-img-overlay">
                       <ul>
                       <li>
-                      <a href="" class="layout-icon-style"><i class="fa fa-link" aria-hidden="true"></i></a>
+                      <a href="../Detail_product/detailProduct.html" class="layout-icon-style" onclick="detailProduct('${product.productId}')" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
                       </li>
                       <li>
                       <button onclick = "addtoCart()" class="layout-icon-style" style ="width:57px;" onclick="addtoCart()"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -99,8 +98,7 @@ function renderAllProducts(products) {
               </div>
               
               `;
-              productElement.innerHTML += productHTML;
-
+    productElement.innerHTML += productHTML;
   });
 }
 //function render sidebar products
@@ -119,24 +117,24 @@ function renderSidebarProducts(products) {
           <span>$${product.discountPrice}</span>
         `;
     } else {
-      displayedPrice = `$${product.price}`
+      displayedPrice = `$${product.price}`;
     }
 
     const starRatingSidebarHTML = getStarRatingSidebar(numberOfReviewsSideBars);
 
     const sideBarproductHTML = `
-        <li>
-          <a href="#">
+    <a href="">
+    <li>
             <div class="sidebar-product-img">
               <img src="${product.img[0]}"> 
             </div>
             <span class="sidebar-product-title">${product.productName}</span> 
-          </a>
-          <div class="star-rating" title="rated ${numberOfReviewsSideBars} out of 5" data-rating="${numberOfReviewsSideBars}">
+            <div class="star-rating" title="rated ${numberOfReviewsSideBars} out of 5" data-rating="${numberOfReviewsSideBars}">
             ${starRatingSidebarHTML}
-          </div>
-          <span class="price">${displayedPrice}</span>
-        </li>
+            </div>
+            <span class="price">${displayedPrice}</span>
+            </li>
+            </a>
       `;
 
     sidebarElement.innerHTML += sideBarproductHTML;
@@ -185,35 +183,33 @@ function getStarRatingSidebar(numberOfReviewsSideBars) {
 renderSidebarProducts(storedProducts);
 
 // Sort by
-let currentSortType = 'default'; 
+let currentSortType = "default";
 // change arrow icon and sort asc , desc
-let sortDirection = 'asc';
-const arrowIcon = document.getElementById('arrowIcon')
+let sortDirection = "asc";
+const arrowIcon = document.getElementById("arrowIcon");
 
-arrowIcon.addEventListener('click', function() {
-  if (arrowIcon.classList.contains('fa-arrow-up')) {
-    arrowIcon.classList.remove('fa-arrow-up');
-    arrowIcon.classList.add('fa-arrow-down');
-    sortDirection = 'desc';
+arrowIcon.addEventListener("click", function () {
+  if (arrowIcon.classList.contains("fa-arrow-up")) {
+    arrowIcon.classList.remove("fa-arrow-up");
+    arrowIcon.classList.add("fa-arrow-down");
+    sortDirection = "desc";
 
-    if (currentSortType === 'price') {
+    if (currentSortType === "price") {
       sortProductsByPrice(sortDirection);
-    } else if (currentSortType === 'rating') {
+    } else if (currentSortType === "rating") {
       sortProductsByReview(sortDirection);
-    } else if (currentSortType === 'name') {
+    } else if (currentSortType === "name") {
       sortProductsByName(sortDirection);
-
     }
-
-  } else if (arrowIcon.classList.contains('fa-arrow-down')) {
-    arrowIcon.classList.remove('fa-arrow-down');
-    arrowIcon.classList.add('fa-arrow-up');
-    sortDirection = 'asc';
-    if (currentSortType === 'price') {
+  } else if (arrowIcon.classList.contains("fa-arrow-down")) {
+    arrowIcon.classList.remove("fa-arrow-down");
+    arrowIcon.classList.add("fa-arrow-up");
+    sortDirection = "asc";
+    if (currentSortType === "price") {
       sortProductsByPrice(sortDirection);
-    } else if (currentSortType === 'rating') {
+    } else if (currentSortType === "rating") {
       sortProductsByReview(sortDirection);
-    } else if (currentSortType === 'name') {
+    } else if (currentSortType === "name") {
       sortProductsByName(sortDirection);
     }
   }
@@ -223,29 +219,29 @@ function sortProductsbyDefault() {
   document.getElementById("allProduct-showcase").innerHTML = "";
   renderAllProducts(storedProducts);
 }
-document.querySelector(".default-sort").addEventListener("click", sortProductsbyDefault);
-
-
+document
+  .querySelector(".default-sort")
+  .addEventListener("click", sortProductsbyDefault);
 
 //name
-document.querySelector(".name-sort").addEventListener("click", function() {
+document.querySelector(".name-sort").addEventListener("click", function () {
   // const direction = (sortDirection === 'asc') ? 'desc' : 'asc';
-sortProductsByName();
+  sortProductsByName();
 });
 
 function sortProductsByName() {
   document.getElementById("allProduct-showcase").innerHTML = "";
-  currentSortType = 'name';
+  currentSortType = "name";
   const sortedByName = products.slice().sort((a, b) => {
     const nameA = a.productName.toUpperCase();
     const nameB = b.productName.toUpperCase();
-    if (sortDirection === 'asc') {
+    if (sortDirection === "asc") {
       if (nameA < nameB) return -1;
       if (nameA > nameB) return 1;
       return 0;
-    } else if (sortDirection === 'desc') {
-      if (nameA > nameB) return -1; 
-      if (nameA < nameB) return 1; 
+    } else if (sortDirection === "desc") {
+      if (nameA > nameB) return -1;
+      if (nameA < nameB) return 1;
       return 0;
     }
   });
@@ -254,43 +250,40 @@ function sortProductsByName() {
 }
 
 //price
-document.querySelector(".price-sort").addEventListener("click", function() {
+document.querySelector(".price-sort").addEventListener("click", function () {
   // const direction = (sortDirection === 'asc') ? 'desc' : 'asc';
-sortProductsByPrice();
-})
+  sortProductsByPrice();
+});
 function sortProductsByPrice() {
   document.getElementById("allProduct-showcase").innerHTML = "";
-  currentSortType = 'price'
+  currentSortType = "price";
   const sortedByPrice = products.slice().sort((a, b) => {
     const priceA = parseFloat(a.price);
     const priceB = parseFloat(b.price);
-    if (sortDirection === 'asc') {
+    if (sortDirection === "asc") {
       return priceA - priceB;
-    } else if (sortDirection === 'desc') {
+    } else if (sortDirection === "desc") {
       return priceB - priceA;
     }
   });
   renderAllProducts(sortedByPrice);
- 
 }
 
 //rating
-document.querySelector(".rating-sort").addEventListener("click", function() {
+document.querySelector(".rating-sort").addEventListener("click", function () {
   // const direction = (sortDirection === 'asc') ? 'desc' : 'asc';
   sortProductsByReview();
 });
 function sortProductsByReview() {
   document.getElementById("allProduct-showcase").innerHTML = "";
-  currentSortType = 'rating'; 
+  currentSortType = "rating";
   const sortedByReview = products.slice().sort((a, b) => {
     const reviewA = parseInt(a.review);
     const reviewB = parseInt(b.review);
-    if (sortDirection === 'asc') {
+    if (sortDirection === "asc") {
       return reviewB - reviewA;
-
-    } else if (sortDirection === 'desc') {
-            return reviewA - reviewB;
-
+    } else if (sortDirection === "desc") {
+      return reviewA - reviewB;
     }
   });
 
@@ -303,21 +296,31 @@ function sortProductsRandomly() {
   const sortedRandomly = products.slice().sort(() => Math.random() - 0.5);
   renderAllProducts(sortedRandomly);
 }
-document.querySelector(".date-sort").addEventListener("click", sortProductsRandomly);
-document.querySelector(".popularity-sort").addEventListener("click", sortProductsRandomly);
+document
+  .querySelector(".date-sort")
+  .addEventListener("click", sortProductsRandomly);
+document
+  .querySelector(".popularity-sort")
+  .addEventListener("click", sortProductsRandomly);
 
-// change content on drop down list 
+// change content on drop down list
 
-const dropdownItems = document.querySelectorAll(".drop-down-list-sort li ")
-const currentSortContent = document.querySelector(".current-sort-content") 
+const dropdownItems = document.querySelectorAll(".drop-down-list-sort li ");
+const currentSortContent = document.querySelector(".current-sort-content");
 
-dropdownItems.forEach(function(dropdown) {
-  dropdown.addEventListener("click", function() {
+dropdownItems.forEach(function (dropdown) {
+  dropdown.addEventListener("click", function () {
     var clickedDropdown = dropdown.innerHTML;
     currentSortContent.innerHTML = clickedDropdown;
-  })
-}) 
-
+  });
+});
 
 renderAllProducts(storedProducts);
 
+
+function detailProduct(id) {
+  console.log(storedProducts);
+  let data = storedProducts.find((item) => item.productId == id);
+  console.log(data);
+  localStorage.setItem("detailProduct", JSON.stringify(data));
+}
