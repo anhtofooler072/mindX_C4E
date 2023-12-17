@@ -422,7 +422,8 @@ a {
 }
 
 .core_value_inner h5 {
-  font-size: 25px;
+  font-size: 23px;
+  text-align: center;
   line-height: 1.3em;
   margin-bottom: 8px;
   text-rendering: optimizeLegibility;
@@ -435,6 +436,7 @@ a {
 
 .core_value_inner p {
   font-size: 20px;
+  color: #050505ab;
   text-align: center;
 }
 /* =============================================================== */

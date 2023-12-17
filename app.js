@@ -113,7 +113,7 @@ function renderNewProducts(products) {
         displayedPrice = product.price;
       }
 
-      const starRatingHTML = getStarRating(numberOfReviews,1);
+      const starRatingHTML = getStarRating(numberOfReviews, 1);
 
       const productHTML = `
             <div class="product-contentContainer" data-id=${product.productId}>
@@ -270,7 +270,7 @@ for (let i = 0; i < toprated.length; i++) {
 
 // generate top rated products
 for (let j = 0; j < toprated.length; j++) {
-  const starRatingHTML = getStarRating(Number(toprated[j].review),0);
+  const starRatingHTML = getStarRating(Number(toprated[j].review), 0);
   if (Number(toprated[j].review) === maxReview) {
     // console.log(toprated[j]);
     topratedProducts_img_content += `
@@ -327,8 +327,8 @@ function addToCart(id) {
   // count number of product then let it in local storage and show it in cart
   count++;
   numberCart.innerHTML = count;
-  let totalPrice = 0;
   localStorage.setItem("number-of-product", JSON.stringify(count));
+  let totalPrice = 0;
   let addedP = takeout.find((item) => item.productId == id);
   let flag = false;
   let index = -1;
@@ -353,13 +353,13 @@ function addToCart(id) {
       ? (selectedPrice = cartProduct[i].pItem.discountPrice)
       : (selectedPrice = cartProduct[i].pItem.price);
     totalPrice += cartProduct[i].sl * selectedPrice;
+    localStorage.setItem("totalprice", JSON.stringify(totalPrice));
   }
   totalPrice_dom.innerHTML = `$${totalPrice}`;
   subTotalPrice_dom.innerHTML = `$${totalPrice}`;
 }
 totalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
-subTotalPrice_dom.innerHTML = `$${JSON.parse(
-  localStorage.getItem("totalprice")
+subTotalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice")
 )}`;
 // ==============================================
 // localStorage.clear();
