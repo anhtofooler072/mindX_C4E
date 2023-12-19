@@ -399,7 +399,7 @@ a {
 /* Quang Anh */
 /* core_value */
 .core_value {
-  margin: auto;
+  margin: 50px auto;
   width: 100%;
   padding: 50px 100px;
   display: inline-flex;
@@ -459,8 +459,9 @@ a {
   margin: 15px 0;
 }
 
-.brandCaro {
-  padding: 50px 0;
+.brandCaro .ourbrandSlide .brandCaro-item img {
+  width: 120% !important;
+  display: inline-block;
 }
 /* =============================================================== */
 
@@ -468,8 +469,8 @@ a {
 .footer {
   height: 100%;
   background-color: #252525;
-  padding: 50px 100px;
-  margin-top: 20px;
+  padding: 50px 50px;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -494,13 +495,13 @@ a {
 
 /* footer universal */
 .footer-contentContainer_item h5 {
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 18px;
 }
 
 .footer-contentContainer_item p {
   margin-top: -10px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: left;
 }
 
@@ -516,7 +517,7 @@ a {
 
 .footer-contentContainer_item ul li {
   list-style: none;
-  padding: 15px 0;
+  padding: 15px 0 8px 0;
   border-bottom: solid 1px #77777716;
 }
 
@@ -616,6 +617,7 @@ a {
   align-items: center;
   gap: 35px;
   justify-content: space-between;
+  margin-bottom: 0;
 }
 
 .bottom_footer .bottom_navbar_right ul li a {
@@ -632,10 +634,16 @@ a {
 .bottom_footer .bottom_footer_left {
   width: auto;
 }
+.bottom_footer .bottom_footer_left p {
+  width: auto;
+  margin-bottom: 0;
+  color: #777777;
+}
 
 .bottom_footer .bottom_footer_left span {
   font-size: 14px;
   color: #c4c4c4;
+  margin-bottom: 0;
 }
 
 /* =============================================================== */

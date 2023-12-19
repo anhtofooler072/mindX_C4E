@@ -35,7 +35,7 @@ function renderFilteredProducts(products) {
                    <div class="allProduct-img-overlay">
                       <ul>
                       <li>
-                      <a href="" class="layout-icon-style"><i class="fa fa-link" aria-hidden="true"></i></a>
+                      <a href="../Detail_product/detailProduct.html" class="layout-icon-style" onclick="detailProduct('${product.productId}')" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
                       </li>
                       <li>
                       <button class="layout-icon-style" style ="width:57px;" onclick="addtoCart()"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -139,3 +139,10 @@ function renderFilteredProducts(products) {
   }
 renderSidebarProducts(storedProducts);
 renderFilteredProducts(storedProducts);
+
+function detailProduct(id) {
+  console.log(storedProducts);
+  let data = storedProducts.find((item) => item.productId == id);
+  console.log(data);
+  localStorage.setItem("detailProduct", JSON.stringify(data));
+}

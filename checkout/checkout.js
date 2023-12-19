@@ -28,12 +28,14 @@ let orderList=JSON.parse(localStorage.getItem('added-to-Cart'))
               <div class="sidebar-product-img">
                 <img src="${product.img[0]}"> 
               </div>
+              <div class="products-sidebar-showcase-info">
               <span class="sidebar-product-title">${product.productName}</span> 
             </a>
             <div class="star-rating" title="rated ${numberOfReviewsSideBars} out of 5" data-rating="${numberOfReviewsSideBars}">
               ${starRatingSidebarHTML}
             </div>
             <span class="price">${displayedPrice}</span>
+              </div>
           </li>
         `;
     

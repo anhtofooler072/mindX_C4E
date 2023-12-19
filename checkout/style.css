@@ -1255,3 +1255,33 @@ select {
   padding: 12px;
   margin-top: 30px;
 }
+
+.products-sidebar-showcase{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 25px 0 30px 0;
+}
+.products-sidebar-showcase li{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 ;
+  padding: 10px 0;
+  width: 100%;
+  border-bottom: solid 2px #aaaaaa2b ;
+}
+
+.products-sidebar-showcase img{
+  width: 100px;
+  border-radius: 5px;
+}
+
+.products-sidebar-showcase-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 10px;
+}

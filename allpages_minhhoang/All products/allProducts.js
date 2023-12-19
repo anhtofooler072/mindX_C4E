@@ -88,7 +88,7 @@ function renderAllProducts(products) {
   
                   </div> 
               </div>
-                <a href=""><p>${product.productName}</p> </a>
+                <a href="../Detail_product/detailProduct.html" target="_blank"><p>${product.productName}</p> </a>
                 <div class="star-rating" title="rated ${numberOfReviews} out of 5" data-rating ="${numberOfReviews}">
                 ${starRatingHTML}
                 </div>

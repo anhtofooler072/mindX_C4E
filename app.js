@@ -1,48 +1,10 @@
-// for header
-// thứ ngày tháng năm trên header
-let currentDay = new Date();
-let day = document.getElementById("day");
-let month = document.getElementById("month");
-let day2 = document.getElementById("day2");
-let years = document.getElementById("year");
-
-let number_day = currentDay.getDay();
-let day_name = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-day.innerText = day_name[number_day] + " , ";
-let number_month = currentDay.getMonth();
-let month_name = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-month.innerText = month_name[number_month];
-day2.innerText = currentDay.getDate();
-years.innerText = currentDay.getFullYear();
-
 let takeout = JSON.parse(localStorage.getItem("products"));
 let item_list = document.getElementById("item-list-arriva-1");
 function renderProduct_arrival_1(takeout) {
   let item_show = "";
   let item_sale = "";
   takeout.forEach((item, index) => {
-    if (index < 4) {
+    if (index < 6) {
       let star_rate_item = "";
       let review_item = parseInt(item.review);
       for (let i = 0; i < 5; i++) {
@@ -58,7 +20,7 @@ function renderProduct_arrival_1(takeout) {
       // console.log(item.productId)
       item_show += `
                 <div class="item-buy-box inl-block">
-                    <div class="item-border-box" \
+                    <div class="item-border-box"
                     onmouseover="changeImage_arrival_1(this, '${item.img[1]}')" 
                     onmouseout="changeImage_arrival_1(this, '${item.img[0]}')">
                         <div class="product-item" href="#">
@@ -67,7 +29,7 @@ function renderProduct_arrival_1(takeout) {
                                     ${item_sale}
                                 <div class="button-buy-box">
                                     <button class="button detail-item"><i class="fa fa-link"></i></button>
-                                    <button class="button buy-item" onclick='addToCart(${item.productId});'><i class="fa fa-shopping-bag"></i></button>
+                                    <button class="button buy-item" onclick=addToCart(${item.productId})><i class="fa fa-shopping-bag"></i></button>
                                 </div>
                             </div>  
                             <p class="item-name">${item.productName}</p>
@@ -311,6 +273,7 @@ if (
   cartProduct = [];
 } else {
   cartProduct = JSON.parse(localStorage.getItem("added-to-Cart"));
+  console.log(cartProduct);
 }
 
 let pItem = [];
@@ -357,9 +320,32 @@ function addToCart(id) {
   }
   totalPrice_dom.innerHTML = `$${totalPrice}`;
   subTotalPrice_dom.innerHTML = `$${totalPrice}`;
+  cart_Boxdisplay();
 }
 totalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
-subTotalPrice_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice")
+subTotalPrice_dom.innerHTML = `$${JSON.parse(
+  localStorage.getItem("totalprice")
 )}`;
+
+// hiển thị sản phẩm trong item-buy-amount-box
+function cart_Boxdisplay() {
+  let product = JSON.parse(localStorage.getItem("added-to-Cart"));
+  console.log(product);
+  let cartBOX_dom = document.querySelector("#QAcart_Box");
+  let cartProduct_dom_content = "";
+  for (let j = 0; j < product.length; j++) {
+    cartProduct_dom_content += `
+    <div class="item-added-box-detail">
+    <img class="item-buy-pic" src="${product[j].pItem.img[0]}" alt="img-ảnh đồ mua">
+    <div class="item-detail-price inl-block">
+    <p class="item-name-buy inl-block">${product[j].pItem.productName}</p>
+    <p class="item-amount-price">${product[j].sl} x ${product[j].pItem.price}</p>
+    </div>
+    `;
+  }
+  cartBOX_dom.innerHTML = cartProduct_dom_content;
+  console.log(cartBOX_dom);
+}
+cart_Boxdisplay();
 // ==============================================
 // localStorage.clear();
