@@ -111,14 +111,14 @@ function renderDetail(detailProduct) {
             ${detailProduct.description}
         </p>    
         </div>
-        <form class="cart">
+        <div class="cart">
         <div class="quantity-button">
-        <input type="button" value="-" class="minus">
+        <input type="button" value="-" class="minus" onclick="changeQuantity('-')">
         <input type="number" class="input-number" name="quantity" value="1" min="1">
-        <input type="button" value="+" class="plus">
+        <input type="button" value="+" class="plus" onclick="changeQuantity('+')">
         </div>
-        <button onclick="addtoCart()" type="submit" class="add_to_cart_btn">Add to cart</button> 
-        </form>
+        <button onclick="addtoCart('${detailProduct.productId}')" class="add_to_cart_btn">Add to cart</button> 
+        </div>
         <div class="detailProduct-link">
             Categories: ${categoriesDetail}
         </div>
@@ -425,5 +425,110 @@ function renderFooter(detailProduct) {
 
 }
 
-
 renderFooter(detail);
+
+
+// =====================================add to cart=======================
+let tookout = JSON.parse(localStorage.getItem("products"));
+let numCart = document.querySelector("#amount");
+let small_numCart = document.querySelector("#sm-amount");
+let numCart_contentamount;
+let total_price_dom = document.querySelector("#totalPrices");
+let sub_total_price_dom = document.querySelector("#Subtotal_QA");
+
+if (
+    localStorage.getItem("added-to-Cart") == "[]" ||
+    localStorage.getItem("added-to-Cart") == undefined
+  ) {
+    cartProduct = [];
+  } else {
+    cartProduct = JSON.parse(localStorage.getItem("added-to-Cart"));
+    console.log(cartProduct);
+  }
+  let pitem = [];
+  // check if there is value in count in local storage
+  let countt = 0;
+  if (localStorage.getItem("number-of-product") == undefined) {
+  } else {
+    countt = JSON.parse(localStorage.getItem("number-of-product"));
+  }
+  console.log(countt);
+  numCart.innerHTML = countt;
+  small_numCart.innerHTML = countt;
+
+function addtoCart(id) {
+    // console.log(id);
+    let totalPrice = 0;
+    let takeout = JSON.parse(localStorage.getItem("products"));
+    let item = takeout.find((item) => item.productId == id);
+    // console.log(item);
+    let cartProduct = JSON.parse(localStorage.getItem("added-to-Cart"));
+    let indexItem = cartProduct.findIndex((item) => item.pItem.productId == id);
+    let quantity = Number(document.querySelector(".input-number").value);
+    if (indexItem == -1) {
+        console.log("chưa có trong giỏ hàng");
+        cartProduct.push({
+            sl: quantity,
+            pItem: item,
+        });
+        countt += Number(quantity);
+    }else{
+        cartProduct[indexItem].sl=Number(cartProduct[indexItem].sl)+Number(quantity);
+        console.log(Number(cartProduct[indexItem].sl));
+        console.log(Number(quantity));
+        countt += Number(quantity);
+    }
+    
+    for (i = 0; i < cartProduct.length; i++) {
+        cartProduct[i].pItem.discount == 1
+        ? (selectedPrice = cartProduct[i].pItem.discountPrice)
+        : (selectedPrice = cartProduct[i].pItem.price);
+        totalPrice += cartProduct[i].sl * selectedPrice;
+        localStorage.setItem("totalprice", JSON.stringify(totalPrice));
+    }
+    numCart.innerHTML = countt;
+    small_numCart.innerHTML = countt;
+    total_price_dom.innerHTML = `$${totalPrice}`;
+    sub_total_price_dom.innerHTML = `$${totalPrice}`;
+
+    localStorage.setItem("added-to-Cart", JSON.stringify(cartProduct));
+    cart_Boxdisplay();
+}
+    total_price_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
+    sub_total_price_dom.innerHTML = `$${JSON.parse(localStorage.getItem("totalprice"))}`;
+
+function changeQuantity(operator) {
+    let quantity = document.querySelector(".input-number").value;
+    if (operator === "+") {
+        quantity++;
+    } else if (operator === "-") {
+        if (quantity > 1) {
+            quantity--;
+        }
+    }
+    document.querySelector(".input-number").value = quantity;
+}
+
+// =====================================add to cart=======================
+
+// =====================================cart box=======================
+function cart_Boxdisplay() {
+    let product = JSON.parse(localStorage.getItem("added-to-Cart"));
+    console.log(product);
+    let cartBOX_dom = document.querySelector("#QAcart_Box");
+    let cartProduct_dom_content = "";
+    for (let j = 0; j < product.length; j++) {
+      cartProduct_dom_content += `
+      <div class="item-added-box-detail">
+      <img class="item-buy-pic" src="${product[j].pItem.img[0]}" alt="img-ảnh đồ mua">
+      <div class="item-detail-price">
+      <p class="item-name-buy inl-block">${product[j].pItem.productName}</p>
+      <p class="item-amount-price">${product[j].sl} x ${product[j].pItem.price}</p>
+      </div>
+      </div>
+      `;
+    }
+    cartBOX_dom.innerHTML = cartProduct_dom_content;
+    console.log(cartBOX_dom);
+  }
+  cart_Boxdisplay();

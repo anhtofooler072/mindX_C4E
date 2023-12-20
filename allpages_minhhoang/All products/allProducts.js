@@ -327,6 +327,7 @@ function detailProduct(id) {
   localStorage.setItem("detailProduct", JSON.stringify(data));
 }
 
+// ================================== footer =================================
 // for top rated products in footer
 let topratedProducts_img;
 topratedProducts_img = document.querySelector(".topratedProducts");
@@ -363,12 +364,14 @@ for (let j = 0; j < toprated.length; j++) {
     topratedProducts_img.innerHTML = topratedProducts_img_content;
   }
 }
+// =====================================footer=======================
 
 // =====================================add to cart=======================
 
 // function add to cart
 let takeout = JSON.parse(localStorage.getItem("products"));
 let numberCart = document.querySelector("#amount");
+let small_numberCart = document.querySelector("#sm-amount");
 let numberCart_contentamount;
 let totalPrice_dom = document.querySelector("#totalPrices");
 let subTotalPrice_dom = document.querySelector("#Subtotal_QA");
@@ -399,12 +402,14 @@ if (localStorage.getItem("number-of-product") == undefined) {
 }
 console.log(count);
 numberCart.innerHTML = count;
+small_numberCart.innerHTML = count;
 
 function addToCart(id) {
   console.log(id);
   // count number of product then let it in local storage and show it in cart
   count++;
   numberCart.innerHTML = count;
+  small_numberCart.innerHTML = count;
   localStorage.setItem("number-of-product", JSON.stringify(count));
   let totalPrice = 0;
   let addedP = takeout.find((item) => item.productId == id);
@@ -465,3 +470,8 @@ function cart_Boxdisplay() {
 }
 cart_Boxdisplay();
 // ==============================================
+
+function addOpen(){
+  let small_menu=document.getElementById("type-menu-small")
+  small_menu.classList.toggle("dpl-block")
+}
