@@ -219,6 +219,7 @@
     width: 1250px;
     margin: auto;
     position: relative;
+    margin-bottom: -50px;
 }
 /* header content */
 .allProduct-section-container {
@@ -230,7 +231,7 @@
 
 .allProduct-left {
     width: 68%;
-    float:left;
+    float: left;
 }
 
 .allProduct-left .allProduct-header {

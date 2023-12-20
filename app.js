@@ -1,3 +1,39 @@
+let currentDay = new Date();
+let day = document.getElementById("day");
+let month = document.getElementById("month");
+let day2 = document.getElementById("day2");
+let years = document.getElementById("year");
+
+let number_day = currentDay.getDay();
+let day_name = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+day.innerText = day_name[number_day] + " , ";
+let number_month = currentDay.getMonth();
+let month_name = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+month.innerText = month_name[number_month];
+day2.innerText = currentDay.getDate();
+years.innerText = currentDay.getFullYear();
+
 let takeout = JSON.parse(localStorage.getItem("products"));
 let item_list = document.getElementById("item-list-arriva-1");
 function renderProduct_arrival_1(takeout) {
@@ -91,12 +127,12 @@ function renderNewProducts(products) {
             ${discountSpan}
                  <div class="img-overlay">
                     <ul>
-                    <li>
-                    <button class="buy-item"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    </button>
-                    </li>
-                    <li>
+                    <li class="inl-block">
                     <a href=""><i class="fa fa-link" aria-hidden="true"></i>
+                    </a>
+                    </li>
+                    <li class="inl-block" onclick=addToCart(${product.productId})>
+                    <a><i class="fa fa-shopping-bag" aria-hidden="true"></i>
                     </a>
                     </li>
                     </ul>
@@ -250,7 +286,7 @@ for (let j = 0; j < toprated.length; j++) {
     topratedProducts_img.innerHTML = topratedProducts_img_content;
   }
 }
-// ==============================================
+// =====================================add to cart=======================
 
 // function add to cart
 let numberCart = document.querySelector("#amount");
@@ -337,9 +373,10 @@ function cart_Boxdisplay() {
     cartProduct_dom_content += `
     <div class="item-added-box-detail">
     <img class="item-buy-pic" src="${product[j].pItem.img[0]}" alt="img-ảnh đồ mua">
-    <div class="item-detail-price inl-block">
+    <div class="item-detail-price">
     <p class="item-name-buy inl-block">${product[j].pItem.productName}</p>
     <p class="item-amount-price">${product[j].sl} x ${product[j].pItem.price}</p>
+    </div>
     </div>
     `;
   }

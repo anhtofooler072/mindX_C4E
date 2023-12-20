@@ -31,12 +31,12 @@ function render(cartProduct) {
                             <td class="product-name">${cartProduct[i].pItem.productName}</td>
                             <td class="product-price">$${cartProduct[i].pItem.discountPrice}</td>
                             <td class="product-quantity">
-                                <button class="cart-button__minus" onclick=minus(${i}>-</button>
+                                <button class="cart-button__minus" onclick=minus(${i})>-</button>
                                 <input class="quantity-value" id="productId${i}" min="1" type="number" value="${cartProduct[i].sl}">
                                 <button class="cart-button__plus" onclick=plus(${i})>+</button>
                             </td>
                             <td class="product-subtotal">$${cartProduct[i].pItem.discountPrice}</td>
-                            <td class="product-remove"><button class="cart-button__remove"><i class="fa-solid fa-x"></i></button></td>
+                            <td class="product-remove"><button class="cart-button__remove" onclick=remove(${i})><i class="fa-solid fa-x"></i></button></td>
                         </tr>
                    
         `;
@@ -58,7 +58,7 @@ function render(cartProduct) {
             <td class="product-subtotal" id="productSub${i}">$${
           cartProduct[i].pItem.price * cartProduct[i].sl
         }</td>
-            <td class="product-remove" id="removeBtn${i}" onclick=remove(${i})><button class="cart-button__remove"><i class="fa-solid fa-x"></i></button></td>
+            <td class="product-remove" id="removeBtn${i}" onclick="remove(${i}); productAmount();"><button class="cart-button__remove"><i class="fa-solid fa-x"></i></button></td>
         </tr>
     
     `;
@@ -92,7 +92,7 @@ function render(cartProduct) {
                         <span>Total</span><span class="price-value">$${total}</span>
                     </div>
                 </div>
-                <button class="btn-proceedCheckout btn-red">Proceed to checkout</button>
+                <a href="../checkout/checkout.html"><button class="btn-proceedCheckout btn-red">Proceed to checkout</button></a>
             </div>
             </div>
             `;
@@ -159,10 +159,9 @@ function remove(i) {
   localStorage.setItem("added-to-Cart", JSON.stringify(pDel));
   let newCartProduct = JSON.parse(localStorage.getItem("added-to-Cart"));
   total = 0;
-  sum(newCartProduct);
   render(newCartProduct);
+  sum(newCartProduct);
   location.reload();
-  productAmount();
 }
 
 if (cartProduct.length == 0) {
@@ -177,6 +176,63 @@ function productAmount() {
   for (let i = 0; i < cartProduct.length; i++) {
     productAmount += cartProduct[i].sl;
   }
+  console.log(productAmount);
   localStorage.setItem("number-of-product", productAmount);
   // check if there is value in number-of-product in local storage
+}
+productAmount();
+
+
+// Star rating
+function getStarRating(numberOfReviews, renderflag) {
+  if (renderflag) {
+    let starsHTML = "";
+    for (let i = 5; i > 0; i--) {
+      const starClass = i <= numberOfReviews ? "star" : "starOpacity";
+      starsHTML += `<span class="${starClass}" data-rating="${i}"><i class="fa fa-star" aria-hidden="true"></i></span>`;
+    }
+    return starsHTML;
+  } else {
+    let starsHTML = "";
+    for (let i = 5; i > 0; i--) {
+      const starClass = i <= numberOfReviews ? "star" : "starOpacity";
+      starsHTML += `<span class="${starClass} topratedProducts_item_detail_rated" data-rating="${i}"><i class="fa fa-star" aria-hidden="true"></i></span>`;
+    }
+    return starsHTML;
+  }
+}
+// for top rated products in footer
+let topratedProducts_img;
+topratedProducts_img = document.querySelector(".topratedProducts");
+// console.log(topratedProducts_img);
+// for footer
+// find top rated products
+let toprated = JSON.parse(localStorage.getItem("products"));
+let topratedProducts_img_content = "";
+let maxReview = Number(toprated[0].review);
+for (let i = 0; i < toprated.length; i++) {
+  if (maxReview < Number(toprated[i].review)) {
+    maxReview = Number(toprated[i].review);
+  }
+}
+// console.log(maxReview);
+// generate top rated products
+for (let j = 0; j < toprated.length; j++) {
+  const starRatingHTML = getStarRating(Number(toprated[j].review), 0);
+  if (Number(toprated[j].review) === maxReview) {
+    // console.log(toprated[j]);
+    topratedProducts_img_content += `
+    <div class="topratedProducts_item">
+                <img src="${toprated[j].img[1]}" alt="pict">
+                <div class="topratedProducts_item_detail">
+                  <p class="topratedProducts_item_detail_name">${toprated[j].productName}</p>
+                  <div class="star-rating topratedProducts_item_detail_rated" title="rated 3 out of 5" data-rating="3">
+                  ${starRatingHTML}
+                  </div>
+                  <p class="topratedProducts_item_detail_price">${toprated[j].price}</p>
+              </div>
+              </div>
+    `;
+    topratedProducts_img.innerHTML = topratedProducts_img_content;
+  }
 }

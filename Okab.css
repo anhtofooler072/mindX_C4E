@@ -1103,12 +1103,27 @@ button:focus {
   }
 }
 
+
+/* render san pham o cart box */
+
 .item-added-box {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .item-added-box-detail {
-  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
 }
+
+.item-detail-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+/* ======================================= */
